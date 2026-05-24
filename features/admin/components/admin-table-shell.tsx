@@ -7,17 +7,26 @@ export function AdminTableShell({
   children,
   emptyMessage,
   isEmpty,
+  isRTL = false, // إضافة prop جديدة
 }: {
   columns: Column[]
   children: React.ReactNode
   emptyMessage: string
   isEmpty: boolean
+  isRTL?: boolean // اختياري
 }) {
   return (
     <div className="overflow-hidden rounded-[8px] bg-white shadow-[0_32px_64px_-12px_rgba(16,24,40,0.14)]">
       <div className="overflow-x-auto">
         <div className="min-w-[720px]">
-          <div className="flex items-center rounded-t-[8px] bg-gradient-to-l from-[#032C44] to-[#41A0CA] text-white">
+          <div
+            className={cn(
+              "flex items-center rounded-t-[8px] text-white",
+              isRTL
+                ? "bg-gradient-to-r from-[#032C44] to-[#41A0CA]" // RTL: من اليسار لليمين (فاتح ← غامق)
+                : "bg-gradient-to-l from-[#032C44] to-[#41A0CA]" // LTR: من اليمين لليسار (فاتح ← غامق)
+            )}
+          >
             {columns.map((col) => (
               <div
                 key={col.key}

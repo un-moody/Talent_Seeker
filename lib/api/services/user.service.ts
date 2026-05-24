@@ -1,6 +1,6 @@
 // lib/api/services/user.service.ts
 import { api } from "../client"
-import type { ApiResponse, User, JobApplication, Job, PaginationMeta } from "../types"
+import type { ApiResponse, User, JobApplication, PaginationMeta } from "../types"
 
 export interface UpdateProfileData {
   name?: string
@@ -8,6 +8,31 @@ export interface UpdateProfileData {
   phone?: string
   country_id?: number
   city_id?: number
+}
+
+function unwrapPayload<T>(response: unknown): T | undefined {
+  if (!response || typeof response !== "object") return undefined
+
+  const payload = response as { data?: T; items?: T; results?: T }
+  if (payload.data !== undefined) return payload.data
+  if (payload.items !== undefined) return payload.items
+  if (payload.results !== undefined) return payload.results
+
+  return undefined
+}
+
+function extractApplications(response: unknown): JobApplication[] {
+  if (Array.isArray(response)) return response as JobApplication[]
+
+  const payload = unwrapPayload<JobApplication[]>(response)
+  return Array.isArray(payload) ? payload : []
+}
+
+function extractPaginationMeta(response: unknown): PaginationMeta | undefined {
+  if (!response || typeof response !== "object") return undefined
+
+  const payload = response as { meta?: PaginationMeta }
+  return payload.meta
 }
 
 export async function updateProfile(
@@ -64,11 +89,20 @@ export async function getMyApplications(
   page = 1,
   locale = "ar"
 ): Promise<{ data: JobApplication[]; meta: PaginationMeta }> {
-  const response = await api.get<ApiResponse<JobApplication[]>>(
-    `/user/applications?page=${page}`,
-    { token, locale }
-  )
-  return { data: response.data, meta: response.meta! }
+  const response = await api.get<unknown>(`/my-applications?page=${page}`, {
+    token,
+    locale,
+  })
+
+  const data = extractApplications(response)
+  const meta = extractPaginationMeta(response) ?? {
+    current_page: page,
+    last_page: 1,
+    per_page: data.length || 10,
+    total: data.length,
+  }
+
+  return { data, meta }
 }
 
 export async function getUserStats(
@@ -80,13 +114,18 @@ export async function getUserStats(
   accepted_applications: number
   rejected_applications: number
 }> {
-  const response = await api.get<
-    ApiResponse<{
-      total_applications: number
-      pending_applications: number
-      accepted_applications: number
-      rejected_applications: number
-    }>
-  >("/user/stats", { token, locale })
-  return response.data
+  const response = await api.get<unknown>("/user/dashboard/stats", { token, locale })
+  const payload = unwrapPayload<{
+    total_applications?: number
+    pending_applications?: number
+    accepted_applications?: number
+    rejected_applications?: number
+  }>(response)
+
+  return {
+    total_applications: Number(payload?.total_applications ?? 0),
+    pending_applications: Number(payload?.pending_applications ?? 0),
+    accepted_applications: Number(payload?.accepted_applications ?? 0),
+    rejected_applications: Number(payload?.rejected_applications ?? 0),
+  }
 }

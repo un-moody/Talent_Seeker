@@ -15,7 +15,7 @@ export async function CategoriesSection() {
   const categories = getCategoryKeys()
 
   return (
-    <SectionShell id="categories" stagger={false} className="overflow-visible bg-white py-12 sm:py-16 lg:py-[82px]">
+    <SectionShell id="categories" stagger={false} className="overflow-hidden bg-white py-12 sm:py-16 lg:py-[82px]">
       <div className="flex flex-col gap-10 lg:gap-16">
         <StaggerInView className="flex flex-col items-start gap-6 text-start" immediate>
           <StaggerItem immediate>
@@ -38,18 +38,18 @@ export async function CategoriesSection() {
           </div>
         </StaggerInView>
 
-        <StaggerInView className="overflow-visible" immediate>
-          <div className="grid grid-cols-1 gap-6 overflow-visible sm:grid-cols-2 lg:grid-cols-4">
+        <StaggerInView className="overflow-hidden" immediate>
+          <div className="grid grid-cols-1 gap-6 overflow-hidden sm:grid-cols-2 lg:grid-cols-4">
             {categories.map((key) => (
-              <StaggerItem key={key} immediate className="overflow-visible p-1">
+              <StaggerItem key={key} immediate className="overflow-hidden p-1">
                 <Card
                   className={cn(
-                    "group relative min-h-[236px] cursor-pointer overflow-visible rounded-lg border border-[#d4d4d4] bg-white transition-all duration-300",
+                    "group relative min-h-[236px] cursor-pointer overflow-hidden rounded-lg border border-[#d4d4d4] bg-white transition-all duration-300",
                     CARD_HOVER_SHADOW
                   )}
                 >
-                  <CardContent className="flex h-full min-h-[236px] flex-col items-start gap-6 overflow-visible px-6 py-8">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-visible rounded-full border border-[#40A0CA] bg-white transition-colors group-hover:border-white group-hover:bg-white">
+                  <CardContent className="flex h-full min-h-[236px] flex-col items-start gap-6 overflow-hidden px-6 py-8">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#40A0CA] bg-white transition-colors group-hover:border-white group-hover:bg-white">
                       <CategoryIconFor
                         categoryKey={key}
                         className="text-[#40A0CA] transition-colors group-hover:text-[#2D7494]"
@@ -68,9 +68,9 @@ export async function CategoriesSection() {
               </StaggerItem>
             ))}
 
-            <StaggerItem immediate className="overflow-visible p-1 sm:col-span-2 lg:col-span-1">
-              <Card className="min-h-[236px] overflow-visible rounded-lg border border-[#4BB7E7] bg-[url('/contact/button-noise.png'),linear-gradient(180deg,#398DB3_0%,#2D7494_100%)] bg-size-[150px_150px,auto] bg-blend-[plus-lighter,normal] text-white shadow-[0_0_0_5px_#FFFFFF,0_0_0_4px_#C2E3FA,0_4px_5px_rgba(75,183,231,0.15),0_10px_13px_rgba(75,183,231,0.22),0_24px_32px_rgba(75,183,231,0.19)]">
-                <CardContent className="flex h-full min-h-[236px] flex-col justify-between gap-4 overflow-visible px-6 py-6">
+            <StaggerItem immediate className="overflow-hidden p-1 sm:col-span-2 lg:col-span-1">
+              <Card className="min-h-[236px] overflow-hidden rounded-lg border border-[#4BB7E7] bg-[url('/contact/button-noise.png'),linear-gradient(180deg,#398DB3_0%,#2D7494_100%)] bg-size-[150px_150px,auto] bg-blend-[plus-lighter,normal] text-white shadow-[0_0_0_5px_#FFFFFF,0_0_0_4px_#C2E3FA,0_4px_5px_rgba(75,183,231,0.15),0_10px_13px_rgba(75,183,231,0.22),0_24px_32px_rgba(75,183,231,0.19)]">
+                <CardContent className="flex h-full min-h-[236px] flex-col justify-between gap-4 overflow-hidden px-6 py-6">
                   <div className="space-y-4 text-start">
                     <p className="text-[48px] font-medium leading-[1.16] sm:text-[64px]">13k+</p>
                     <p className="text-[16px] font-normal capitalize leading-[1.16]">{t("metricLabel")}</p>

@@ -7,6 +7,8 @@ import { getHomeSurfaceClassName } from "@/features/shared-home"
 import { SupportSection } from "@/features/support"
 import { TestimonialsSection } from "@/features/testimonials"
 
+export const dynamic = "force-dynamic"
+
 export default async function Home() {
   return (
     <main className={`flex-1 ${getHomeSurfaceClassName()}`}>

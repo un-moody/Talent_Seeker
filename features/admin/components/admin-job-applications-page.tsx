@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
-import { getCompanyJob, getJobApplications } from "@/lib/api/services/company.service"
+import { getAdminJobApplications, getAdminJobById } from "@/lib/api/services/admin.service"
 import { getJobTitle } from "@/features/company-jobs/lib/job-title"
 import { DashboardStatusBadge } from "@/features/dashboard/components/dashboard-status-badge"
 import { cn } from "@/lib/utils"
@@ -32,13 +32,13 @@ export async function AdminJobApplicationsPage({
   accessToken: string
 }) {
   const t = await getTranslations("Admin.jobs")
-  const job = await getCompanyJob(jobId, accessToken, locale)
+  const job = await getAdminJobById(jobId, accessToken, locale)
 
   if (!job) {
     notFound()
   }
 
-  const { data: applications } = await getJobApplications(jobId, accessToken, 1, locale)
+  const { data: applications } = await getAdminJobApplications(jobId, accessToken, 1, locale)
   const title = getJobTitle(job, locale)
   const statusLabels: Record<string, string> = {
     pending: t("applicationsPage.status.pending"),

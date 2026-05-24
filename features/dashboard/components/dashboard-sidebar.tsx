@@ -142,7 +142,6 @@ function SidebarNav({
           { icon: "/dashboard/dashboard.svg", label: isRTL ? "لوحة التحكم" : "Dashboard", href: `/${locale}/dashboard/company` },
           { icon: "/dashboard/profile.svg", label: isRTL ? "تحديث الملف الشخصي" : "Update Profile", href: `/${locale}/dashboard/company/profile` },
           { icon: "/dashboard/jobs.svg", label: isRTL ? "كل الوظائف" : "All Jobs", href: `/${locale}/dashboard/company/jobs` },
-          { icon: "/dashboard/education_Info.svg", label: isRTL ? "المتقدمين" : "Applicants", href: `/${locale}/dashboard/company/applicants` },
           { icon: "/dashboard/tickets.svg", label: isRTL ? "التذاكر" : "Tickets", href: `/${locale}/dashboard/company/tickets` },
         ]
       case "admin":
@@ -158,7 +157,7 @@ function SidebarNav({
           },
           {
             icon: "/dashboard/profile.svg",
-            label: isRTL ? "صفحة من نحن" : "About Page",
+            label: isRTL ? " من نحن" : "About Page",
             href: `/${locale}/dashboard/admin/about`,
           },
           {

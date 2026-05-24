@@ -1,6 +1,8 @@
 // lib/api/services/admin.service.ts
 import { api } from "../client"
-import type { ApiResponse, Job, User, PaginationMeta } from "../types"
+import type { ApiResponse, Job, JobApplication, User, PaginationMeta } from "../types"
+
+const ADMIN_JOB_STATUSES = ["pending", "approved", "active", "rejected"] as const
 
 export async function getAdminJobs(
   token: string,
@@ -14,6 +16,80 @@ export async function getAdminJobs(
     { token, locale }
   )
   return { data: response.data, meta: response.meta! }
+}
+
+export async function getAdminJobById(
+  jobId: number,
+  token: string,
+  locale = "ar"
+): Promise<Job | null> {
+  try {
+    for (const status of ADMIN_JOB_STATUSES) {
+      let page = 1
+      let hasMore = true
+
+      while (hasMore) {
+        const { data, meta } = await getAdminJobs(token, status, page, locale)
+        const job = data.find((entry) => entry.id === jobId)
+
+        if (job) {
+          return job
+        }
+
+        hasMore = meta.last_page > page
+        page += 1
+      }
+    }
+
+    return null
+  } catch (error) {
+    console.error("[Admin Service] getAdminJobById error:", error)
+    return null
+  }
+}
+
+export async function getAdminJobApplications(
+  jobId: number,
+  token: string,
+  page = 1,
+  locale = "ar"
+): Promise<{ data: JobApplication[]; meta: PaginationMeta }> {
+  try {
+    const response = await api.get<unknown>(
+      `/admin/job-applications?job_id=${jobId}&page=${page}`,
+      { token, locale }
+    )
+
+    const typedResponse = response as
+      | { data?: JobApplication[]; meta?: PaginationMeta }
+      | JobApplication[]
+      | undefined
+
+    const data = Array.isArray(typedResponse)
+      ? typedResponse
+      : Array.isArray(typedResponse?.data)
+        ? typedResponse.data
+        : []
+
+    const meta = Array.isArray(typedResponse)
+      ? {
+          current_page: page,
+          last_page: 1,
+          per_page: 10,
+          total: data.length,
+        }
+      : typedResponse?.meta || {
+          current_page: page,
+          last_page: 1,
+          per_page: 10,
+          total: data.length,
+        }
+
+    return { data, meta }
+  } catch (error) {
+    console.error("[Admin Service] getAdminJobApplications error:", error)
+    throw error
+  }
 }
 
 export async function approveJob(

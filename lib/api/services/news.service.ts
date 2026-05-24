@@ -1,5 +1,5 @@
 import { api } from "../client"
-import type { ApiResponse, News, PaginationMeta } from "../types"
+import type { News, PaginationMeta } from "../types"
 
 export interface NewsFilter {
   per_page?: number
@@ -104,7 +104,7 @@ export async function getNews(
   })
 
   const query = params.toString() ? `?${params}` : ""
-  const endpoints = [`/public/news${query}`, `/news${query}`]
+  const endpoints = [`/news${query}`, `/public/news${query}`]
 
   for (const endpoint of endpoints) {
     try {
@@ -116,20 +116,10 @@ export async function getNews(
       if (parsed.data.length > 0) return parsed
     } catch (err) {
       console.error(err)
-      // try next path
     }
   }
 
-  try {
-    const response = await api.get<ApiResponse<News[]>>(`/public/news${query}`, {
-      locale,
-      cache: "force-cache",
-    })
-    return parseNewsResponse(response, locale)
-  } catch (err) {
-    console.error(err)
-    return { data: [] }
-  }
+  return { data: [] }
 }
 
 export async function getAdminNews(
@@ -159,7 +149,7 @@ export async function createNewsItem(
   token: string,
   locale = "ar"
 ): Promise<News> {
-  const response = await api.post<ApiResponse<unknown>>(`/news`, formData, { token, locale })
+  const response = await api.post<unknown>(`/news`, formData, { token, locale })
   const parsed = parseNewsResponse(response, locale)
   return parsed.data[0] ?? { id: 0, title: "", slug: "", excerpt: "", content: "", published_at: "" }
 }
@@ -170,13 +160,13 @@ export async function updateNewsItem(
   token: string,
   locale = "ar"
 ): Promise<News> {
-  const response = await api.post<ApiResponse<unknown>>(`/news/${id}`, formData, { token, locale })
+  const response = await api.post<unknown>(`/news/${id}`, formData, { token, locale })
   const parsed = parseNewsResponse(response, locale)
   return parsed.data[0] ?? { id, title: "", slug: "", excerpt: "", content: "", published_at: "" }
 }
 
 export async function getNewsItem(slug: string, locale = "ar"): Promise<News | null> {
-  const endpoints = [`/public/news/${slug}`, `/news/${slug}`]
+  const endpoints = [`/news/${slug}`, `/public/news/${slug}`]
 
   for (const endpoint of endpoints) {
     try {
@@ -193,7 +183,6 @@ export async function getNewsItem(slug: string, locale = "ar"): Promise<News | n
       if (normalized) return normalized
     } catch (err) {
       console.error(err)
-      // try next path
     }
   }
 

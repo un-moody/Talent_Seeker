@@ -94,7 +94,7 @@ export async function getSuccessStories(
   if (filter.page) params.set("page", String(filter.page))
   const query = params.toString() ? `?${params}` : ""
 
-  const endpoints = [`/public/success-stories${query}`, `/success-stories${query}`]
+  const endpoints = [`/success-stories${query}`, `/public/success-stories${query}`]
 
   for (const endpoint of endpoints) {
     try {
@@ -106,7 +106,6 @@ export async function getSuccessStories(
       if (parsed.data.length > 0) return parsed
     } catch (err) {
       console.error(err)
-      // try next path
     }
   }
 

@@ -1,91 +1,139 @@
 // app/[locale]/dashboard/user/applications/page.tsx
+import { redirect } from "next/navigation"
 import { getSession } from "@/lib/session"
 import { getMyApplications } from "@/lib/api/services/user.service"
+import { DashboardPageShell } from "@/features/dashboard/components/dashboard-page-shell"
+import { DashboardJobsTable } from "@/features/dashboard/components/dashboard-jobs-table"
+import { DashboardStatCard } from "@/features/dashboard/components/dashboard-stat-card"
 import { getJobTitle } from "@/features/company-jobs/lib/job-title"
-import type { JobApplication } from "@/lib/api/types"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-export default async function UserApplicationsPage() {
-  const session = await getSession()
-  const token = session.accessToken
+function formatApplicationDate(value: string | undefined, locale: string) {
+  if (!value) return "—"
 
-  if (!token) {
-    return <div>خطأ في التوثيق</div>
-  }
-
-  let applications: JobApplication[] = []
   try {
-    const { data } = await getMyApplications(token, 1, "ar")
-    applications = data || []
-  } catch (error) {
-    return (
-      <div className="p-6">
-        <div className="text-red-600">حدث خطأ في تحميل البيانات</div>
-      </div>
-    )
+    const formatter =
+      locale === "ar"
+        ? new Intl.DateTimeFormat("ar-EG")
+        : locale === "de"
+          ? new Intl.DateTimeFormat("de-DE")
+          : new Intl.DateTimeFormat("en-GB")
+
+    return formatter.format(new Date(value))
+  } catch {
+    return "—"
+  }
+}
+
+export default async function UserApplicationsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+  const session = await getSession()
+  const isAr = locale === "ar"
+
+  if (!session.isLoggedIn || !session.accessToken) {
+    redirect(`/${locale}/sign-in`)
   }
 
-  const statusConfig = {
-    pending: { label: "معلق", color: "bg-yellow-100 text-yellow-800" },
-    accepted: { label: "مقبول", color: "bg-green-100 text-green-800" },
-    rejected: { label: "مرفوض", color: "bg-red-100 text-red-800" },
+  const labels = {
+    title: isAr ? "طلباتي للوظائف" : "My job applications",
+    description: isAr
+      ? "تابع جميع الطلبات والنتائج في مكان واحد"
+      : "Track every application and its current status in one place",
+    empty: isAr ? "لم تقدم على أي وظائف بعد" : "You have not applied to any jobs yet",
+    total: isAr ? "إجمالي الطلبات" : "Total applications",
+    pending: isAr ? "طلبات معلقة" : "Pending",
+    accepted: isAr ? "طلبات مقبولة" : "Accepted",
+    rejected: isAr ? "طلبات مرفوضة" : "Rejected",
+    viewAll: isAr ? "عرض الكل" : "View all",
+    details: isAr ? "تفاصيل" : "Details",
+    company: isAr ? "اسم الشركة" : "Company Name",
+    jobTitle: isAr ? "عنوان الوظيفة" : "Job Title",
+    deadline: isAr ? "تاريخ التقديم" : "Applied On",
+    status: isAr ? "الحالة" : "Status",
+    actions: isAr ? "الإجراءات" : "Actions",
   }
+
+  const applications = await getMyApplications(session.accessToken, 1, locale as "ar" | "en" | "de")
+    .then((result) => result.data)
+    .catch(() => [])
+
+  const statusCounts = applications.reduce(
+    (acc, app) => {
+      if (app.status === "accepted") acc.accepted += 1
+      else if (app.status === "rejected") acc.rejected += 1
+      else acc.pending += 1
+      return acc
+    },
+    { pending: 0, accepted: 0, rejected: 0 }
+  )
+
+  const rows = applications.map((app) => ({
+    id: app.id,
+    title: app.job ? getJobTitle(app.job, locale as "ar" | "en" | "de") : "—",
+    column2: app.job?.company?.name ?? "—",
+    deadline: formatApplicationDate(app.applied_at, locale),
+    status: (app.status === "accepted"
+      ? "accepted"
+      : app.status === "rejected"
+        ? "rejected"
+        : "pending") as "accepted" | "rejected" | "pending",
+    detailsHref: `/${locale}/jobs/${app.job?.id ?? app.id}`,
+  }))
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8">طلباتي للوظائف</h1>
+    <DashboardPageShell title={labels.title} description={labels.description}>
+      <div className="flex flex-col gap-6">
+        <div className="grid gap-4 xl:grid-cols-4">
+          <DashboardStatCard
+            iconSrc="/dashboard/jobs.svg"
+            title={labels.total}
+            value={applications.length}
+            viewAllHref={`/${locale}/dashboard/user/applications`}
+            viewAllLabel={labels.viewAll}
+            isRTL={isAr}
+          />
+          <DashboardStatCard
+            iconSrc="/dashboard/favourites.svg"
+            title={labels.pending}
+            value={statusCounts.pending}
+            viewAllHref={`/${locale}/dashboard/user/applications`}
+            viewAllLabel={labels.viewAll}
+            isRTL={isAr}
+          />
+          <DashboardStatCard
+            iconSrc="/dashboard/tickets.svg"
+            title={labels.accepted}
+            value={statusCounts.accepted}
+            viewAllHref={`/${locale}/dashboard/user/applications`}
+            viewAllLabel={labels.viewAll}
+            isRTL={isAr}
+          />
+          <DashboardStatCard
+            iconSrc="/dashboard/jobs.svg"
+            title={labels.rejected}
+            value={statusCounts.rejected}
+            viewAllHref={`/${locale}/dashboard/user/applications`}
+            viewAllLabel={labels.viewAll}
+            isRTL={isAr}
+          />
+        </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>جميع الطلبات ({applications.length})</CardTitle>
-        </CardHeader>
-        <CardContent>
-          {applications.length === 0 ? (
-            <div className="text-center py-8">
-              <p className="text-gray-500 mb-4">لم تقدم على أي وظائف بعد</p>
-            </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="border-b">
-                  <tr>
-                    <th className="text-right py-3 px-4 font-semibold">الوظيفة</th>
-                    <th className="text-right py-3 px-4 font-semibold">الشركة</th>
-                    <th className="text-right py-3 px-4 font-semibold">تاريخ التقديم</th>
-                    <th className="text-right py-3 px-4 font-semibold">الحالة</th>
-                    <th className="text-right py-3 px-4 font-semibold">الإجراء</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {applications.map((app) => (
-                    <tr key={app.id} className="border-b hover:bg-gray-50">
-                      <td className="py-3 px-4">{getJobTitle(app.job, "ar")}</td>
-                      <td className="py-3 px-4">{app.job.company?.name ?? "—"}</td>
-                      <td className="py-3 px-4">
-                        {new Date(app.applied_at).toLocaleDateString("ar-EG")}
-                      </td>
-                      <td className="py-3 px-4">
-                        <span
-                          className={`px-3 py-1 rounded-full text-sm font-medium ${
-                            statusConfig[app.status as keyof typeof statusConfig]
-                              ?.color || "bg-gray-100 text-gray-800"
-                          }`}
-                        >
-                          {statusConfig[app.status as keyof typeof statusConfig]?.label ||
-                            app.status}
-                        </span>
-                      </td>
-                      <td className="py-3 px-4">
-                        <button className="text-blue-600 hover:underline">عرض التفاصيل</button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-    </div>
+        <DashboardJobsTable
+          title={labels.title}
+          rows={rows}
+          col2Label={labels.company}
+          emptyMessage={labels.empty}
+          detailsLabel={labels.details}
+          jobTitleLabel={labels.jobTitle}
+          deadlineLabel={labels.deadline}
+          statusLabel={labels.status}
+          actionsLabel={labels.actions}
+          isRTL={isAr}
+        />
+      </div>
+    </DashboardPageShell>
   )
 }

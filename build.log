@@ -1,0 +1,304 @@
+
+> cvs@0.1.0 build
+> next build
+
+▲ Next.js 16.2.4 (Turbopack)
+- Environments: .env.local
+- Experiments (use with caution):
+  · serverActions
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 9.0s
+  Running TypeScript ...
+  Finished TypeScript in 12.4s ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/121) ...
+  Generating static pages using 7 workers (30/121) 
+  Generating static pages using 7 workers (60/121) 
+Error: Dynamic server usage: Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/jobs?per_page=12 /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at v (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:8:77519)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:17:16230)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6636)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6164) {
+  description: "Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/jobs?per_page=12 /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Dynamic server usage: Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/categories /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at v (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:8:77519)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:17:16230)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6636)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6164) {
+  description: "Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/categories /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Dynamic server usage: Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/jobs?per_page=12 /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at v (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:8:77519)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:17:16230)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6636)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6164) {
+  description: "Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/jobs?per_page=12 /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Dynamic server usage: Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/categories /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at v (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:8:77519)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:17:16230)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6636)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6164) {
+  description: "Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/categories /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Dynamic server usage: Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/jobs?per_page=12 /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at v (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:8:77519)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:17:16230)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6636)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6164) {
+  description: "Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/jobs?per_page=12 /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Dynamic server usage: Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/categories /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at v (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:8:77519)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:17:16230)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6636)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6164) {
+  description: "Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/categories /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+  Generating static pages using 7 workers (90/121) 
+Error: Dynamic server usage: Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/jobs?per_page=12 /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at v (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:8:77519)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:17:16230)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6636)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6164) {
+  description: "Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/jobs?per_page=12 /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Dynamic server usage: Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/categories /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at v (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:8:77519)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:17:16230)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6636)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6164) {
+  description: "Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/categories /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Dynamic server usage: Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/jobs?per_page=12 /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at v (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:8:77519)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:17:16230)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6636)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6164) {
+  description: "Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/jobs?per_page=12 /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Dynamic server usage: Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/categories /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at v (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:8:77519)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:17:16230)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6636)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6164) {
+  description: "Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/categories /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Dynamic server usage: Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/jobs?per_page=12 /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at v (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:8:77519)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:17:16230)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6636)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6164) {
+  description: "Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/jobs?per_page=12 /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Dynamic server usage: Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/categories /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at v (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:8:77519)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:17:16230)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6636)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6164) {
+  description: "Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/categories /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Dynamic server usage: Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/jobs?per_page=12 /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at v (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:8:77519)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:17:16230)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6636)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6164) {
+  description: "Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/jobs?per_page=12 /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Dynamic server usage: Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/categories /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at v (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:8:77519)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:17:16230)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6636)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6164) {
+  description: "Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/categories /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Dynamic server usage: Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/jobs?per_page=12 /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at v (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:8:77519)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:17:16230)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6636)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6164) {
+  description: "Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/jobs?per_page=12 /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Dynamic server usage: Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/categories /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at v (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:8:77519)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:17:16230)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6636)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6164) {
+  description: "Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/categories /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Dynamic server usage: Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/jobs?per_page=12 /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at v (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:8:77519)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:17:16230)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6636)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6164) {
+  description: "Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/jobs?per_page=12 /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Dynamic server usage: Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/categories /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at v (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:8:77519)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:17:16230)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6636)
+    at <unknown> (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0.angw.._.js:1:6164) {
+  description: "Route /[locale] couldn't be rendered statically because it used no-store fetch https://cv.subcodeco.com/api/v1/public/categories /[locale]. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error [ApiError]: The route api/v1/public/news could not be found.
+    at c (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__06puh~r._.js:1:1376)
+    at async g (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__06puh~r._.js:1:3203)
+    at async j (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\_0nt-bfy._.js:1:1133)
+    at async p (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\_0nt-bfy._.js:1:12393) {
+  status: 404,
+  errors: undefined
+}
+Error [ApiError]: The route api/v1/public/success-stories could not be found.
+    at c (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__06puh~r._.js:1:1376)
+    at async f (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0eyhs70._.js:1:5660)
+    at async G (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\_05o8k6p._.js:1:17093) {
+  status: 404,
+  errors: undefined
+}
+Error [ApiError]: The route api/v1/public/home could not be found.
+    at c (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__06puh~r._.js:1:1376)
+    at async c (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__10dxskh._.js:1:8339)
+    at async i (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__10dxskh._.js:1:10350)
+    at async y (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\_05o8k6p._.js:1:16615) {
+  status: 404,
+  errors: undefined
+}
+Error [ApiError]: The route api/v1/public/news could not be found.
+    at c (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__06puh~r._.js:1:1376)
+    at async g (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__06puh~r._.js:1:3203)
+    at async j (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\_0nt-bfy._.js:1:1133)
+    at async p (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\_0nt-bfy._.js:1:12393) {
+  status: 404,
+  errors: undefined
+}
+Error [ApiError]: The route api/v1/public/home could not be found.
+    at c (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__06puh~r._.js:1:1376)
+    at async c (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__10dxskh._.js:1:8339)
+    at async i (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__10dxskh._.js:1:10350)
+    at async y (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\_05o8k6p._.js:1:16615) {
+  status: 404,
+  errors: undefined
+}
+Error [ApiError]: The route api/v1/public/news could not be found.
+    at c (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__06puh~r._.js:1:1376)
+    at async g (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__06puh~r._.js:1:3203)
+    at async j (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\_0nt-bfy._.js:1:1133)
+    at async p (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\_0nt-bfy._.js:1:12393) {
+  status: 404,
+  errors: undefined
+}
+Error [ApiError]: The route api/v1/public/success-stories could not be found.
+    at c (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__06puh~r._.js:1:1376)
+    at async f (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0eyhs70._.js:1:5660)
+    at async G (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\_05o8k6p._.js:1:17093) {
+  status: 404,
+  errors: undefined
+}
+Error [ApiError]: The route api/v1/public/success-stories could not be found.
+    at c (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__06puh~r._.js:1:1376)
+    at async f (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__0eyhs70._.js:1:5660)
+    at async G (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\_05o8k6p._.js:1:17093) {
+  status: 404,
+  errors: undefined
+}
+Error [ApiError]: The route api/v1/public/home could not be found.
+    at c (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__06puh~r._.js:1:1376)
+    at async c (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__10dxskh._.js:1:8339)
+    at async i (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\[root-of-the-server]__10dxskh._.js:1:10350)
+    at async y (C:\Users\El mostafa\Downloads\new-cvs-main\new-cvs-main\.next\server\chunks\ssr\_05o8k6p._.js:1:16615) {
+  status: 404,
+  errors: undefined
+}
+✓ Generating static pages using 7 workers (121/121) in 1313ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /_not-found
+├ ƒ /[locale]
+├ ƒ /[locale]/about
+├ ƒ /[locale]/contact
+├ ƒ /[locale]/dashboard
+├ ƒ /[locale]/dashboard/admin
+├ ƒ /[locale]/dashboard/admin/about
+├ ƒ /[locale]/dashboard/admin/companies
+├ ƒ /[locale]/dashboard/admin/jobs
+├ ƒ /[locale]/dashboard/admin/jobs/[id]
+├ ƒ /[locale]/dashboard/admin/jobs/[id]/applications
+├ ƒ /[locale]/dashboard/admin/news
+├ ƒ /[locale]/dashboard/admin/notifications
+├ ƒ /[locale]/dashboard/admin/settings
+├ ƒ /[locale]/dashboard/admin/success-stories
+├ ƒ /[locale]/dashboard/admin/users
+├ ƒ /[locale]/dashboard/company
+├ ƒ /[locale]/dashboard/company/applicants
+├ ƒ /[locale]/dashboard/company/jobs
+├ ƒ /[locale]/dashboard/company/jobs/[id]
+├ ƒ /[locale]/dashboard/company/jobs/[id]/applications
+├ ƒ /[locale]/dashboard/company/jobs/create
+├ ƒ /[locale]/dashboard/company/profile
+├ ƒ /[locale]/dashboard/company/tickets
+├ ƒ /[locale]/dashboard/user
+├ ƒ /[locale]/dashboard/user/applications
+├ ƒ /[locale]/dashboard/user/education
+├ ƒ /[locale]/dashboard/user/favourites
+├ ƒ /[locale]/dashboard/user/profile
+├ ƒ /[locale]/dashboard/user/tickets
+├ ƒ /[locale]/forgot-password
+├ ƒ /[locale]/jobs
+├ ƒ /[locale]/jobs/[id]
+├ ƒ /[locale]/news
+├ ƒ /[locale]/news/[slug]
+├ ƒ /[locale]/services
+├ ƒ /[locale]/sign-in
+├ ƒ /[locale]/sign-up
+├ ƒ /[locale]/verify-email
+├ ƒ /api/auth/forgot-password
+├ ƒ /api/auth/login
+├ ƒ /api/auth/logout
+├ ƒ /api/auth/profile
+├ ƒ /api/auth/profile/avatar
+├ ƒ /api/auth/profile/password
+├ ƒ /api/auth/refresh
+├ ƒ /api/auth/register
+├ ƒ /api/auth/resend-verification
+├ ƒ /api/auth/reset-password
+├ ƒ /api/auth/session
+├ ƒ /api/auth/verify
+├ ƒ /api/auth/verify-reset-code
+├ ƒ /api/categories
+├ ƒ /api/cities
+├ ƒ /api/company-types
+├ ƒ /api/company/jobs
+├ ƒ /api/countries
+├ ƒ /api/notifications
+├ ƒ /api/notifications/[id]/read
+├ ƒ /api/notifications/unread-count
+├ ○ /robots.txt
+└ ○ /sitemap.xml
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

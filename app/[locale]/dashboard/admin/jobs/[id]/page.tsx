@@ -1,6 +1,6 @@
 import { notFound, redirect } from "next/navigation"
 import { getSession } from "@/lib/session"
-import { getCompanyJob } from "@/lib/api/services/company.service"
+import { getAdminJobById } from "@/lib/api/services/admin.service"
 import { AdminJobDetailView } from "@/features/admin/components/admin-job-detail-view"
 
 export default async function AdminJobDetailPage({
@@ -21,7 +21,7 @@ export default async function AdminJobDetailPage({
     redirect(`/${locale}/dashboard`)
   }
 
-  const job = await getCompanyJob(jobId, session.accessToken, locale)
+  const job = await getAdminJobById(jobId, session.accessToken, locale)
 
   if (!job) {
     notFound()

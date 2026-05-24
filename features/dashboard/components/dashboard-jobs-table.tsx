@@ -38,20 +38,36 @@ export function DashboardJobsTable({
   actionsLabel = "Actions",
 }: DashboardJobsTableProps) {
   return (
-    <div className="flex w-full flex-col gap-6">
-      <h2 className="text-xl font-semibold capitalize leading-[150%] text-[#262626]">{title}</h2>
+    <div className={cn("flex w-full flex-col gap-6", isRTL && "rtl")} dir={isRTL ? "rtl" : "ltr"}>
+      <h2 className={cn("text-xl font-semibold capitalize leading-[150%] text-[#262626]", isRTL && "text-right")}>
+        {title}
+      </h2>
 
       <div className="w-full overflow-x-auto rounded-[8px]">
         {/* Table header */}
         <div
-          className="flex min-w-[720px] items-center rounded-t-[8px] bg-gradient-to-l from-[#032C44] to-[#41A0CA] text-white"
-          dir={isRTL ? "rtl" : "ltr"}
+          className={cn(
+            "flex min-w-[720px] items-center rounded-t-[8px] text-white",
+            isRTL
+              ? "bg-gradient-to-r from-[#032C44] to-[#41A0CA]" // RTL: من اليسار إلى اليمين
+              : "bg-gradient-to-l from-[#032C44] to-[#41A0CA]" // LTR: من اليمين إلى اليسار
+          )}
         >
-          <div className="w-[28%] shrink-0 px-2 py-2 text-base font-normal">{jobTitleLabel}</div>
-          <div className="flex flex-1 justify-center px-2 py-2 text-base font-normal">{col2Label}</div>
-          <div className="flex flex-1 justify-center px-2 py-2 text-base font-normal">{deadlineLabel}</div>
-          <div className="flex flex-1 justify-center px-2 py-2 text-base font-normal">{statusLabel}</div>
-          <div className="flex flex-1 justify-end px-2 py-2 text-base font-normal">{actionsLabel}</div>
+          <div className={cn("w-[28%] shrink-0 px-2 py-2 text-base font-normal", isRTL && "text-right")}>
+            {jobTitleLabel}
+          </div>
+          <div className="flex flex-1 justify-center px-2 py-2 text-base font-normal">
+            {col2Label}
+          </div>
+          <div className="flex flex-1 justify-center px-2 py-2 text-base font-normal">
+            {deadlineLabel}
+          </div>
+          <div className="flex flex-1 justify-center px-2 py-2 text-base font-normal">
+            {statusLabel}
+          </div>
+          <div className="flex flex-1 px-2 py-2 text-base font-normal justify-center">
+            {actionsLabel}
+          </div>
         </div>
 
         {/* Rows */}
@@ -64,11 +80,14 @@ export function DashboardJobsTable({
                 key={row.id}
                 className={cn(
                   "flex items-center border-b border-gray-50 last:border-0",
-                  index % 2 === 0 ? "bg-white" : "bg-gradient-to-l from-[#032C44]/10 to-[#41A0CA]/10"
+                  index % 2 === 0 
+                    ? "bg-white" 
+                    : isRTL
+                      ? "bg-gradient-to-r from-[#032C44]/10 to-[#41A0CA]/10" // RTL: عكس التدرج
+                      : "bg-gradient-to-l from-[#032C44]/10 to-[#41A0CA]/10" // LTR: التدرج الأصلي
                 )}
-                dir={isRTL ? "rtl" : "ltr"}
               >
-                <div className="flex w-[28%] shrink-0 items-center gap-2 px-2 py-3 text-base font-medium text-[#262626]">
+                <div className={"flex w-[28%] shrink-0 items-center gap-2 px-2 py-3 text-base font-medium text-[#262626]"}>
                   <Image
                     src="/dashboard/jobs.svg"
                     alt=""
@@ -88,7 +107,7 @@ export function DashboardJobsTable({
                 <div className="flex flex-1 justify-center px-2 py-3">
                   <DashboardStatusBadge status={row.status} />
                 </div>
-                <div className="flex flex-1 justify-end px-2 py-3">
+                <div className={"flex flex-1 px-2 py-3 justify-center "}>
                   <Link
                     href={row.detailsHref}
                     className="inline-flex items-center gap-2 rounded-[8px] bg-gradient-to-b from-[#006EA8] to-[#005685] px-4 py-2 text-xs font-normal text-white shadow-[inset_0_1px_18px_2px_#E8F2FF,inset_0_1px_4px_2px_#C2DDFF] hover:opacity-95"

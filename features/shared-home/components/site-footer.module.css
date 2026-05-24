@@ -111,6 +111,6 @@
 
 .noiseBg {
   background-image: url('/footer/noise-bg.png');
-  background-size: 420px 420px;
+  background-size: 100% 100%;
   background-repeat: repeat;
 }

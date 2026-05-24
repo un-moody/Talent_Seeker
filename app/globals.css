@@ -151,16 +151,16 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
   }
   button:hover,
   a:hover {
     cursor: pointer;
   }
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
+    @apply bg-background text-foreground;
   }
   html {
-    @apply font-sans overflow-x-hidden;
+    @apply font-sans;
   }
 }

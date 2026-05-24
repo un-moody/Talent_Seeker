@@ -1,6 +1,7 @@
 // lib/api/client.ts
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.talentseeker.com/api/v1"
+const isBrowser = typeof window !== "undefined"
 
 export class ApiError extends Error {
   public status: number
@@ -15,7 +16,24 @@ export class ApiError extends Error {
 
 type FetchOptions = RequestInit & { locale?: string; token?: string }
 
+function ensureBrowserSafeRequest(endpoint: string) {
+  if (!isBrowser) {
+    return
+  }
+
+  if (!endpoint.startsWith("/")) {
+    throw new Error("Browser-side API calls must use a local path such as /api/...")
+  }
+
+  if (!BASE_URL.startsWith(window.location.origin)) {
+    throw new Error(
+      "Browser-side API calls are blocked for external API origins. Use a local Next.js route instead."
+    )
+  }
+}
+
 async function fetchApi<T>(endpoint: string, options: FetchOptions = {}): Promise<T> {
+  ensureBrowserSafeRequest(endpoint)
   const { locale, token, ...fetchOptions } = options
 
   const headers: Record<string, string> = {

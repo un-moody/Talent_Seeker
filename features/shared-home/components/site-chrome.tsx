@@ -55,7 +55,7 @@ export function SiteChrome({ children, session }: SiteChromeProps) {
           isDashboard={isDashboard}
         />
       )}
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 overflow-x-hidden">{children}</main>
       {!hideFooter && <SiteFooter />}
     </>
   )

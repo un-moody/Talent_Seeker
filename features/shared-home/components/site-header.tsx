@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Image from "next/image"
-import { Bell, ChevronDown, Check, Menu, User as UserIcon } from "lucide-react"
+import { Bell, ChevronDown, Check, Menu, User as UserIcon, X } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 import { PrimaryButton } from "@/components/ui/primary-button"
@@ -55,6 +55,7 @@ export function SiteHeader({
   const pathname = usePathname() ?? "/"
   const [showNotifications, setShowNotifications] = React.useState(false)
   const notificationsRef = React.useRef<HTMLDivElement>(null)
+  const buttonRef = React.useRef<HTMLButtonElement>(null)
   const isRTL = currentLocale === "ar"
   
   const [authState, setAuthState] = React.useState<{
@@ -158,15 +159,25 @@ export function SiteHeader({
     }
   }, [currentLocale, pathname, initialIsLoggedIn, checkAuth])
 
+  // Improved click outside handler
   React.useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (notificationsRef.current && !notificationsRef.current.contains(event.target as Node)) {
+      if (
+        showNotifications &&
+        notificationsRef.current && 
+        !notificationsRef.current.contains(event.target as Node) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
         setShowNotifications(false)
       }
     }
+    
     document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
-  }, [])
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [showNotifications])
 
   React.useEffect(() => {
     let mounted = true
@@ -189,7 +200,7 @@ export function SiteHeader({
     if (isLoggedIn) fetchUnread()
 
     return () => { mounted = false }
-  }, [isLoggedIn, currentLocale])
+  }, [isLoggedIn])
 
   React.useEffect(() => {
     if (!isLoggedIn || !showNotifications) return
@@ -263,12 +274,10 @@ export function SiteHeader({
         isDashboard && "bg-[#001222]"
       )}
     >
-      {/* Background effects - fixed positioning to prevent overflow */}
-      <div className="pointer-events-none fixed top-0 -start-[10%] h-full w-[40%] bg-[#80CDF6] opacity-10 blur-[120px]" />
-      <div className="pointer-events-none fixed top-0 -end-[10%] h-full w-[40%] bg-[#80CDF6] opacity-10 blur-[120px]" />
+      <div className="pointer-events-none absolute top-0 -start-[10%] h-full w-[40%] bg-[#80CDF6] opacity-10 blur-[120px]" />
+      <div className="pointer-events-none absolute top-0 -end-[10%] h-full w-[40%] bg-[#80CDF6] opacity-10 blur-[120px]" />
 
       <div className="relative z-50 mx-auto flex h-[88px] w-full max-w-[1512px] items-center justify-between gap-3 px-4 sm:px-6 lg:h-[128px] lg:gap-6 lg:px-[100px]">
-        {/* Logo */}
         <div className="flex shrink-0 items-center">
           <Link href="/" aria-label={t("brand")} className="flex shrink-0 items-center relative z-50">
             <Image
@@ -283,7 +292,6 @@ export function SiteHeader({
           </Link>
         </div>
 
-        {/* Desktop Navigation - hidden on mobile, shown on lg */}
         <nav className="hidden lg:flex lg:items-center lg:gap-4">
           {NAV_ITEMS.map((item, index) => (
             <React.Fragment key={item.key}>
@@ -301,9 +309,7 @@ export function SiteHeader({
           ))}
         </nav>
 
-        {/* Right side actions */}
         <div className="flex shrink-0 items-center gap-2 sm:gap-3 lg:gap-4">
-          {/* Language Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
@@ -336,10 +342,11 @@ export function SiteHeader({
             </DropdownMenuContent>
           </DropdownMenu>
 
-        
+          {/* Notifications - Fixed to appear above all content */}
           {isLoggedIn && (
             <div className="relative" ref={notificationsRef}>
               <Button
+                ref={buttonRef}
                 variant="ghost"
                 size="icon"
                 className="relative h-10 w-10 rounded-[12px] bg-gradient-to-br from-[#006EA8] to-[#005685] shadow-[0px_42px_107px_rgba(123,190,255,0.34)] transition-all hover:scale-105 sm:h-[44px] sm:w-[44px]"
@@ -347,64 +354,82 @@ export function SiteHeader({
               >
                 <Bell className="h-5 w-5 text-white" />
                 {unreadCount > 0 && (
-                  <span className="absolute -top-1 -end-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white animate-pulse">
-                    {unreadCount}
+                  <span className="absolute -top-1 -end-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
+                    {unreadCount > 99 ? "99+" : unreadCount}
                   </span>
                 )}
               </Button>
 
+              {/* Notifications Dropdown - Fixed positioning with portal-like behavior */}
               {showNotifications && (
-                <div className="absolute end-0 top-[calc(100%+8px)] z-[9999] max-h-[min(70vh,500px)] w-[min(92vw,380px)] overflow-hidden rounded-[16px] border border-gray-100 bg-white shadow-2xl pointer-events-auto">
-                  <div className="border-b border-gray-100 bg-gradient-to-r from-[#006EA8]/5 to-[#005685]/5 p-4">
-                    <h3 className="text-lg font-bold text-gray-900">
-                      {isRTL ? "الإشعارات" : "Notifications"}
-                    </h3>
-                  </div>
-                  <div className="divide-y divide-gray-50 max-h-[400px] overflow-y-auto">
-                    {notificationsLoading && (
-                      <div className="p-6 text-center text-sm text-gray-500">
-                        {isRTL ? "جاري التحميل..." : "Loading..."}
-                      </div>
-                    )}
-                    {!notificationsLoading && notifications.length === 0 && (
-                      <div className="p-6 text-center text-sm text-gray-500">
-                        {isRTL ? "لا توجد إشعارات" : "No notifications"}
-                      </div>
-                    )}
-                    {notifications.map((notification) => (
-                      <div
-                        key={notification.id}
-                        className={cn(
-                          "p-4 hover:bg-gray-50 cursor-pointer transition-all",
-                          !notification.read && "bg-blue-50/60"
-                        )}
-                        onClick={() => markAsRead(notification.id)}
+                <>
+                  {/* Backdrop */}
+                  <div 
+                    className="fixed inset-0 z-[9998] "
+                    onClick={() => setShowNotifications(false)}
+                  />
+                  <div 
+                    className="fixed top-[64px] lg:top-[128px] z-[9999] max-h-[min(60vh,450px)] w-[min(96vw,360px)] overflow-hidden rounded-[16px] border border-gray-100 bg-white shadow-2xl pointer-events-auto "
+                    style={{ [isRTL ? "left" : "right"]: "16px" }}
+                  >
+                    <div className="flex items-center justify-between p-4 border-b border-gray-100 bg-gradient-to-r from-[#006EA8]/5 to-[#005685]/5">
+                      <h3 className="font-bold text-gray-900 text-lg">
+                        {isRTL ? "الإشعارات" : "Notifications"}
+                      </h3>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-8 w-8 rounded-full p-0 hover:bg-gray-100"
+                        onClick={() => setShowNotifications(false)}
                       >
-                        <div className="flex gap-3">
-                          <div className={cn(
-                            "w-10 h-10 rounded-xl flex items-center justify-center shrink-0",
-                            notification.read ? "bg-gray-100" : "bg-gradient-to-br from-[#006EA8] to-[#005685]"
-                          )}>
-                            <Bell className={cn("w-5 h-5", notification.read ? "text-gray-400" : "text-white")} />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className={cn("text-sm font-semibold truncate", notification.read ? "text-gray-600" : "text-gray-900")}>
-                              {notification.title}
-                            </p>
-                            <p className="text-xs text-gray-500 mt-1 line-clamp-2">{notification.description}</p>
-                            <p className="text-[10px] text-gray-400 mt-2">{notification.time}</p>
-                          </div>
-                          {!notification.read && <div className="w-2.5 h-2.5 rounded-full bg-blue-500 shrink-0 mt-2" />}
+                        <X className="h-4 w-4 text-gray-500" />
+                      </Button>
+                    </div>
+                    <div className="divide-y divide-gray-50 max-h-[400px] overflow-y-auto">
+                      {notificationsLoading && (
+                        <div className="p-6 text-center text-sm text-gray-500">
+                          {isRTL ? "جاري التحميل..." : "Loading..."}
                         </div>
-                      </div>
-                    ))}
+                      )}
+                      {!notificationsLoading && notifications.length === 0 && (
+                        <div className="p-6 text-center text-sm text-gray-500">
+                          {isRTL ? "لا توجد إشعارات" : "No notifications"}
+                        </div>
+                      )}
+                      {notifications.map((notification) => (
+                        <div
+                          key={notification.id}
+                          className={cn(
+                            "p-4 hover:bg-gray-50 cursor-pointer transition-all",
+                            !notification.read && "bg-blue-50/60"
+                          )}
+                          onClick={() => markAsRead(notification.id)}
+                        >
+                          <div className="flex gap-3">
+                            <div className={cn(
+                              "w-10 h-10 rounded-xl flex items-center justify-center shrink-0",
+                              notification.read ? "bg-gray-100" : "bg-gradient-to-br from-[#006EA8] to-[#005685]"
+                            )}>
+                              <Bell className={cn("w-5 h-5", notification.read ? "text-gray-400" : "text-white")} />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className={cn("text-sm font-semibold truncate", notification.read ? "text-gray-600" : "text-gray-900")}>
+                                {notification.title}
+                              </p>
+                              <p className="text-xs text-gray-500 mt-1 line-clamp-2">{notification.description}</p>
+                              <p className="text-[10px] text-gray-400 mt-2">{notification.time}</p>
+                            </div>
+                            {!notification.read && <div className="w-2.5 h-2.5 rounded-full bg-blue-500 shrink-0 mt-2" />}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                </>
               )}
             </div>
           )}
 
-          {/* Auth Button / User Avatar */}
           {isLoggedIn ? (
             <Link href="/dashboard" className="hidden sm:block shrink-0">
               <div className="h-10 w-10 cursor-pointer rounded-full bg-gradient-to-br from-[#006EA8] to-[#005685] p-0.5 shadow-[0px_42px_107px_rgba(123,190,255,0.34)] transition-all hover:scale-105 lg:h-[44px] lg:w-[44px]">
@@ -431,7 +456,6 @@ export function SiteHeader({
             </Link>
           )}
 
-          {/* Mobile Menu Button */}
           <Sheet>
             <SheetTrigger asChild>
               <Button
@@ -476,9 +500,7 @@ export function SiteHeader({
                   </Link>
                 ))}
               </nav>
-               <div className="space-y-3 border-t border-white/10 px-4 py-5">
-               
-
+              <div className="space-y-3 border-t border-white/10 px-4 py-5">
                 {isLoggedIn ? (
                   <Link href="/dashboard" onClick={closeMobileMenu} className="block">
                     <PrimaryButton className="h-[48px] w-full text-[16px] font-medium">

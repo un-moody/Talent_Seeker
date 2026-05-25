@@ -31,11 +31,11 @@ export function SectionShell({ id, className, children, stagger = true }: Sectio
     <section
       id={id}
       className={cn(
-        "w-full px-4 sm:px-6 lg:px-[100px] overflow-x-hidden", // منع أي انفلات أفقي
+        "w-full px-4 ", // منع أي انفلات أفقي
         className
       )}
     >
-      <div className="w-full max-w-[1312px] mx-auto overflow-x-hidden">{content}</div>
+      <div className="w-full max-w-[1312px] mx-auto ">{content}</div>
     </section>
   )
 }
